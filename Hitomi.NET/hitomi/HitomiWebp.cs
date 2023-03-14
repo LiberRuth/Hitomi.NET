@@ -15,7 +15,7 @@ namespace Hitomi.NET
         {
             int i = 1;
             List<Task> tasks = new List<Task>();
-            List<string> downloadedFiles = new List<string>();
+            //List<string> downloadedFiles = new List<string>();
 
             var lists = await ImageRoute.List_Hash(number);
             string UA = RandomUA.UserAgent();
