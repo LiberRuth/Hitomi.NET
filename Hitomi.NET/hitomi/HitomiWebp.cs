@@ -10,22 +10,20 @@ namespace Hitomi.NET
     {
         public static int threads { get; set; } = 1;
 
-
-        public static async Task HitomiDownload(int number) 
+        public static async Task HitomiDownload(int number)
         {
+            var lists = await ImageRoute.List_Hash(number);
+            string UA = RandomUA.UserAgent();
+
             int i = 1;
             List<Task> tasks = new List<Task>();
             SemaphoreSlim semaphore = new SemaphoreSlim(threads);
-            //List<string> downloadedFiles = new List<string>();
-
-            var lists = await ImageRoute.List_Hash(number);
-            string UA = RandomUA.UserAgent();
 
             foreach (var item in lists)
             {
                 await semaphore.WaitAsync();
 
-                var task = Task.Run(async () => 
+                var task = Task.Run(async () =>
                 {
                     try
                     {
@@ -52,27 +50,26 @@ namespace Hitomi.NET
                             }
                             System.IO.File.WriteAllBytes($@"C:\Users\{Environment.UserName}\Downloads\{number}\{number}-{i++}.png", content);
                         }
+
                         Console.WriteLine(urls);
-                        //Thread.Sleep(500);
                     }
-                    finally 
-                    { 
+                    finally
+                    {
                         semaphore.Release();
                     }
-                
                 });
 
                 tasks.Add(task);
 
-                if (tasks.Count >= threads) 
+                if (tasks.Count >= threads)
                 {
-                    await Task.WhenAll(tasks);
+                    await Task.WhenAny(tasks);
                     tasks.RemoveAll(x => x.IsCompleted);
-                    //tasks.Clear();
                 }
             }
 
-            await Task.WhenAll(tasks); 
-        } 
+            await Task.WhenAll(tasks);
+        }
+
     }
 }
