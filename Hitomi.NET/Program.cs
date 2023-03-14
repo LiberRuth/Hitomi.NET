@@ -6,6 +6,8 @@ namespace Hitomi.NET
     {
         static async System.Threading.Tasks.Task Main(string[] args)
         {
+            HitomiWebp.threads = 4;
+
             await HitomiWebp.HitomiDownload(1767019);
         }
     }
