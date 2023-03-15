@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Hitomi.NET
 {
@@ -15,7 +16,7 @@ namespace Hitomi.NET
             var lists = await ImageRoute.List_Hash(number);
             string UA = RandomUA.UserAgent();
 
-            int i = 1;
+            //int i = 1;
             List<Task> tasks = new List<Task>();
             SemaphoreSlim semaphore = new SemaphoreSlim(threads);
 
@@ -48,7 +49,7 @@ namespace Hitomi.NET
                             {
                                 di.Create();
                             }
-                            System.IO.File.WriteAllBytes($@"C:\Users\{Environment.UserName}\Downloads\{number}\{number}-{i++}.png", content);
+                            File.WriteAllBytes($@"C:\Users\{Environment.UserName}\Downloads\{number}\{number}-{lists.IndexOf(item)}.png", content);
                         }
 
                         Console.WriteLine(urls);
