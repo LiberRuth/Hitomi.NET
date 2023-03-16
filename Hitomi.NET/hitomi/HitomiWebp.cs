@@ -11,6 +11,8 @@ namespace Hitomi.NET
     {
         public static int threads { get; set; } = 1;
 
+        public static string dir { get; set; } = $@"C:\Users\{Environment.UserName}\Downloads";
+
         public static async Task HitomiDownload(int number)
         {
             var lists = await ImageRoute.List_Hash(number);
@@ -43,13 +45,13 @@ namespace Hitomi.NET
                             response.EnsureSuccessStatusCode();
                             byte[] content = await response.Content.ReadAsByteArrayAsync();
 
-                            string folderPath = $@"C:\Users\{Environment.UserName}\Downloads\{number}";
+                            string folderPath = $@"{dir}\{number}";
                             DirectoryInfo di = new DirectoryInfo(folderPath);
                             if (di.Exists == false)
                             {
                                 di.Create();
                             }
-                            File.WriteAllBytes($@"C:\Users\{Environment.UserName}\Downloads\{number}\{number}-{lists.IndexOf(item)}.png", content);
+                            File.WriteAllBytes($@"{dir}\{number}\{number}-{lists.IndexOf(item)}.png", content);
                         }
 
                         Console.WriteLine(urls);
