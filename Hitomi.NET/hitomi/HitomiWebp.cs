@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace Hitomi.NET
 {
@@ -11,7 +12,25 @@ namespace Hitomi.NET
     {
         public static int threads { get; set; } = 1;
 
-        public static string dir { get; set; } = $@"C:\Users\{Environment.UserName}\Downloads";
+        //public static string dir { get; set; } = $@"C:\Users\{Environment.UserName}\Downloads";
+       
+        public static string dir {
+            get {
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
+                    return $@"C:\Users\{Environment.UserName}\Downloads";
+                } else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) {
+                    return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+                } else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
+                    return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+                } else {
+                    return Directory.GetCurrentDirectory();
+                }
+            }
+            set { 
+            }          
+        }
+        
+        
 
         public static async Task HitomiDownload(int number)
         {
