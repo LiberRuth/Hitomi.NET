@@ -59,7 +59,7 @@ namespace Hitomi.NET
                         using (HttpClient httpClient = new HttpClient())
                         {
                             httpClient.DefaultRequestHeaders.Add("User-Agent", UA);
-                            httpClient.DefaultRequestHeaders.Referrer = new Uri("https://hitomi.la/");
+                            httpClient.DefaultRequestHeaders.Referrer = new Uri($"https://hitomi.la/reader/{number}.html");
                             HttpResponseMessage response = await httpClient.GetAsync(urls);
                             response.EnsureSuccessStatusCode();
                             byte[] content = await response.Content.ReadAsByteArrayAsync();
