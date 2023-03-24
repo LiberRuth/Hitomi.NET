@@ -37,7 +37,6 @@ namespace Hitomi.NET
             var lists = await ImageRoute.List_Hash(number);
             string UA = RandomUA.UserAgent();
 
-            //int i = 1;
             List<Task> tasks = new List<Task>();
             SemaphoreSlim semaphore = new SemaphoreSlim(threads);
 
