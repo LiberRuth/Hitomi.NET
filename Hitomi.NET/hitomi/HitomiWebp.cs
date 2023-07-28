@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace Hitomi.NET
 {
-    internal class HitomiWebp
+    public class HitomiWebp
     {
         public static int threads { get; set; } = 1;
 

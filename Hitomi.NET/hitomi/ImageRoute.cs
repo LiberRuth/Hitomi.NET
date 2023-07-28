@@ -14,7 +14,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Hitomi.NET
 {
-    internal class ImageRoute
+    public class ImageRoute
     {
         public static string Image_Hash(string h)
         {

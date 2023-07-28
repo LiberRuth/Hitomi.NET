@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hitomi.NET
 {
-    internal class RandomUA
+    public class RandomUA
     {
         static Random rnd = new Random();
 
