@@ -8,5 +8,5 @@ Hitomi.la (히토미) API 비공식 다운로더
 ```cs
 HitomiWebp.threads = 4;
 HitomiWebp.dir = $@"C:\Users\{Environment.UserName}\Downloads\filestest";
-await HitomiWebp.HitomiDownload(1767019);
+await HitomiWebp.HitomiDownload(12345);
 ```
