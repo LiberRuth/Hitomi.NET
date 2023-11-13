@@ -26,7 +26,7 @@ namespace Hitomi.NET
 
         public class GG
         {
-            private static string GGtext;
+            private static string? GGtext;
 
             public static async Task GgJS()
             {
@@ -45,7 +45,7 @@ namespace Hitomi.NET
                 var engine = new Engine();
                 var ggjs = engine.Execute(GGtext).GetCompletionValue().ToObject() as ObjectInstance;
                 engine.Execute(GGtext).GetCompletionValue().ToObject();
-                return engine.Execute($"gg.b").GetCompletionValue().ToObject().ToString();
+                return engine.Execute($"gg.b").GetCompletionValue().ToObject().ToString()!;
             }
 
             public static async Task<int> M(int m)
@@ -61,7 +61,7 @@ namespace Hitomi.NET
         }
 
 
-        public static async Task<string> SubdomainFromUrl(string url, string baseValue = null)
+        public static async Task<string> SubdomainFromUrl(string url, string baseValue = null!)
         {
             string retval = "b";
             if (!string.IsNullOrEmpty(baseValue))
@@ -97,9 +97,9 @@ namespace Hitomi.NET
             var JSText = await response.Content.ReadAsStringAsync();
             JSText = JSText.Replace("var galleryinfo = ", "");
             JObject jobject = JObject.Parse(JSText);
-            for (int i = 0; i < jobject["files"].Count(); i++)
+            for (int i = 0; i < jobject["files"]!.Count(); i++)
             {
-                hash_name.Add((string)jobject["files"][i]["hash"]);
+                hash_name.Add((string)jobject["files"]![i]!["hash"]!);
             }
             return hash_name;
         } 
