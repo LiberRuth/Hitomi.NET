@@ -64,7 +64,7 @@ namespace Hitomi.NET
                             {
                                 di.Create();
                             }
-                            File.WriteAllBytes($@"{dir}\{number}\{number}-{lists.IndexOf(item)}.png", content);
+                            File.WriteAllBytes($@"{dir}\{number}\{number}_p{lists.IndexOf(item)}.png", content);
                         }
 
                         Console.WriteLine(urls);
