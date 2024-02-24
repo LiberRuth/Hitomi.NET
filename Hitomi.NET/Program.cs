@@ -6,12 +6,12 @@ namespace Hitomi.NET
     {
         static async Task Main(string[] args)
         {
-            HitomiWebp hitomiWebp = new HitomiWebp();
+            //HitomiWebp hitomiWebp = new HitomiWebp();
 
-            hitomiWebp.thread = 4;
-            hitomiWebp.dir = $@"C:\Users\{Environment.UserName}\Downloads\test2";
+            //hitomiWebp.thread = 4;
+            //hitomiWebp.dir = $@"C:\Users\{Environment.UserName}\Downloads\test2";
 
-            await hitomiWebp.HitomiDownload(1767027);
+            //await hitomiWebp.HitomiDownload(1767027);
         }
     }
 }
