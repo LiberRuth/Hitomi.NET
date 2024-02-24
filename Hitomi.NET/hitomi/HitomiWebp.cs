@@ -5,11 +5,11 @@ namespace Hitomi.NET
 {
     public class HitomiWebp
     {
-        public static int threads { get; set; } = 1;
+        public int thread { get; set; } = 1;
+        ImageRoute imageRoute = new ImageRoute();
+        ImageRoute.GG gG = new ImageRoute.GG();
 
-        //public static string dir { get; set; } = $@"C:\Users\{Environment.UserName}\Downloads";
-       
-        public static string dir {
+        public string dir {
             get {
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
                     return $@"C:\Users\{Environment.UserName}\Downloads";
@@ -24,16 +24,14 @@ namespace Hitomi.NET
             set { 
             }          
         }
-        
-        
-
-        public static async Task HitomiDownload(int number)
+           
+        public async Task HitomiDownload(int number)
         {
-            var lists = await ImageRoute.List_Hash(number);
+            var lists = await imageRoute.List_Hash(number);
             string UA = RandomUA.UserAgent();
 
             List<Task> tasks = new List<Task>();
-            SemaphoreSlim semaphore = new SemaphoreSlim(threads);
+            SemaphoreSlim semaphore = new SemaphoreSlim(thread);
 
             foreach (var item in lists)
             {
@@ -43,10 +41,10 @@ namespace Hitomi.NET
                 {
                     try
                     {
-                        var Files = ImageRoute.Image_Hash(item);
-                        await ImageRoute.GG.GgJS();
-                        string urls = $"https://a.hitomi.la/webp/{await ImageRoute.GG.B()}{Files}/{item}.webp";
-                        var server_number = await ImageRoute.SubdomainFromUrl(urls);
+                        var Files = imageRoute.Image_Hash(item);
+                        await gG.GgJS();
+                        string urls = $"https://a.hitomi.la/webp/{await gG.B()}{Files}/{item}.webp";
+                        var server_number = await imageRoute.SubdomainFromUrl(urls);
                         string str_server = server_number[0].ToString();
                         urls = urls.Insert(8, str_server);
 
@@ -77,7 +75,7 @@ namespace Hitomi.NET
 
                 tasks.Add(task);
 
-                if (tasks.Count >= threads)
+                if (tasks.Count >= thread)
                 {
                     await Task.WhenAny(tasks);
                     tasks.RemoveAll(x => x.IsCompleted);

@@ -12,19 +12,18 @@ namespace Hitomi.NET
 {
     public class ImageRoute
     {
-        public static string Image_Hash(string h)
+        public string Image_Hash(string h)
         {
             Match match = Regex.Match(h, @"(..)(.)$");
             int n = int.Parse(match.Groups[2].Value + match.Groups[1].Value, NumberStyles.HexNumber);
             return n.ToString();
         }
 
-
         public class GG
         {
             private static string? GGtext;
 
-            public static async Task GgJS()
+            public async Task GgJS()
             {
                 HttpClient httpclient = new HttpClient();
                 //HttpResponseMessage response = await httpclient.GetAsync("https://dotnet.microsoft.com/ko-kr/");
@@ -36,7 +35,7 @@ namespace Hitomi.NET
                 GGtext = script;
             }
 
-            public static async Task<string> B()
+            public async Task<string> B()
             {
                 var engine = new Engine();
                 var ggjs = engine.Execute(GGtext).GetCompletionValue().ToObject() as ObjectInstance;
@@ -44,10 +43,10 @@ namespace Hitomi.NET
                 return engine.Execute($"gg.b").GetCompletionValue().ToObject().ToString()!;
             }
 
-            public static async Task<int> M(int m)
+            public async Task<int> M(int m)
             {
                 var engine = new Engine();
-                var ggjs = engine.Execute(GGtext).GetCompletionValue().ToObject() as ObjectInstance;
+                //engine.Execute(GGtext).GetCompletionValue().ToObject() as ObjectInstance;
                 engine.Execute(GGtext).GetCompletionValue().ToObject();
                 var ggMFunction = engine.GetValue("gg").AsObject().Get("m").As<FunctionInstance>();
                 var ggMResult = ggMFunction.Call(Undefined.Instance, new[] { new JsValue(m) }).ToString();
@@ -56,8 +55,7 @@ namespace Hitomi.NET
 
         }
 
-
-        public static async Task<string> SubdomainFromUrl(string url, string baseValue = null!)
+        public async Task<string> SubdomainFromUrl(string url, string baseValue = null!)
         {
             string retval = "b";
             if (!string.IsNullOrEmpty(baseValue))
@@ -77,13 +75,14 @@ namespace Hitomi.NET
             int g = Convert.ToInt32(m.Groups[2].Value + m.Groups[1].Value, b);
             if (!double.IsNaN(g))
             {
-                retval = Convert.ToChar(97 + await GG.M(g)).ToString() + retval;
+                GG gG = new GG();
+                retval = Convert.ToChar(97 + await gG.M(g)).ToString() + retval;
             }
 
             return retval;
         }
 
-        public static async Task<List<string>> List_Hash(int number)
+        public async Task<List<string>> List_Hash(int number)
         {
             List<string> hash_name = new List<string>();
             
