@@ -9,38 +9,8 @@ namespace Hitomi.NET
         ImageRoute imageRoute = new ImageRoute();
         ImageRoute.GG gG = new ImageRoute.GG();
 
-        private string? _path;
-        public string path
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(_path))
-                {
-                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                    {
-                        _path = $@"C:\Users\{Environment.UserName}\Downloads";
-                    }
-                    else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                    {
-                        _path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
-                    }
-                    else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                    {
-                        _path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
-                    }
-                    else
-                    {
-                        _path = Directory.GetCurrentDirectory();
-                    }
-                }
-                return _path;
-            }
-            set
-            {
-                _path = value;
-            }
-        }
-
+        public string? path { get; set; }
+      
         public async Task HitomiDownload(int number)
         {
             var lists = await imageRoute.List_Hash(number);
@@ -72,13 +42,13 @@ namespace Hitomi.NET
                             response.EnsureSuccessStatusCode();
                             byte[] content = await response.Content.ReadAsByteArrayAsync();
 
-                            string folderPath = $@"{_path}\{number}";
+                            string folderPath = $@"{path}/{number}";
                             DirectoryInfo di = new DirectoryInfo(folderPath);
                             if (di.Exists == false)
                             {
                                 di.Create();
                             }
-                            File.WriteAllBytes($@"{_path}\{number}\{number}_p{lists.IndexOf(item)}.png", content);
+                            File.WriteAllBytes($@"{path}/{number}/{number}_p{lists.IndexOf(item)}.png", content);
                         }
 
                         Console.WriteLine(urls);

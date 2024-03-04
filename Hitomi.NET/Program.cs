@@ -11,7 +11,7 @@ namespace Hitomi.NET
             //hitomiWebp.thread = 4;
             //hitomiWebp.path = $@"C:\Users\{Environment.UserName}\Downloads\test2";
 
-            //await hitomiWebp.HitomiDownload(1234);
+            //await hitomiWebp.HitomiDownload(1767027);
         }
     }
 }
