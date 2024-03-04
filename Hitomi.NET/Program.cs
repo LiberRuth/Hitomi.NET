@@ -9,9 +9,9 @@ namespace Hitomi.NET
             //HitomiWebp hitomiWebp = new HitomiWebp();
 
             //hitomiWebp.thread = 4;
-            //hitomiWebp.dir = $@"C:\Users\{Environment.UserName}\Downloads\test2";
+            //hitomiWebp.path = $@"C:\Users\{Environment.UserName}\Downloads\test2";
 
-            //await hitomiWebp.HitomiDownload(1767027);
+            //await hitomiWebp.HitomiDownload(1234);
         }
     }
 }
