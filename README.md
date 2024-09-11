@@ -1,5 +1,7 @@
 # Hitomi.NET
-Hitomi.la (히토미) API 비공식 다운로더
+Hitomi.la (히토미) 비공식 API 
+* 이미지 경로 추출
+* 다운로드 기능
 # Screenshots
 ![imgNET](https://user-images.githubusercontent.com/124418235/224525550-22720250-64e2-4f74-a957-4817d1ca81e4.PNG)
 # Getting started
