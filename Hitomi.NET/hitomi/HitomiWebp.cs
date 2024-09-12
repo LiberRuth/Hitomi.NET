@@ -8,7 +8,7 @@ namespace Hitomi.NET
         public string? path { get; set; }
 
         ImageRoute imageRoute = new ImageRoute();
-        ImageRoute.GG gG = new ImageRoute.GG();
+        ImageRoute.GG GG = new ImageRoute.GG();
 
         public async Task HitomiDownload(int number)
         {
@@ -27,8 +27,8 @@ namespace Hitomi.NET
                     try
                     {
                         var Files = imageRoute.Image_Hash(item);
-                        await gG.GgJS();
-                        string mangaUrl = $"https://a.hitomi.la/webp/{await gG.B()}{Files}/{item}.webp";
+                        await GG.GgJS();
+                        string mangaUrl = $"https://a.hitomi.la/webp/{await GG.B()}{Files}/{item}.webp";
                         var server_number = await imageRoute.SubdomainFromUrl(mangaUrl);
                         string str_server = server_number[0].ToString();
                         mangaUrl = mangaUrl.Insert(8, str_server);
@@ -81,8 +81,8 @@ namespace Hitomi.NET
             foreach (var item in mangaList)
             {
                 var Files = imageRoute.Image_Hash(item);
-                await gG.GgJS();
-                string mangaUrl = $"https://a.hitomi.la/webp/{await gG.B()}{Files}/{item}.webp";
+                await GG.GgJS();
+                string mangaUrl = $"https://a.hitomi.la/webp/{await GG.B()}{Files}/{item}.webp";
                 string server_number = await imageRoute.SubdomainFromUrl(mangaUrl);
                 string str_server = server_number[0].ToString();
                 mangaListReply.Add(mangaUrl.Insert(8, str_server));
@@ -100,12 +100,12 @@ namespace Hitomi.NET
             List<Task> tasks = new List<Task>();
             SemaphoreSlim semaphore = new SemaphoreSlim(thread);
 
-            await gG.GgJS();
+            await GG.GgJS();
 
             foreach (var item in mangaList)
             {
                 var Files = imageRoute.Image_Hash(item);
-                string mangaUrl = $"https://a.hitomi.la/webp/{await gG.B()}{Files}/{item}.webp";
+                string mangaUrl = $"https://a.hitomi.la/webp/{await GG.B()}{Files}/{item}.webp";
                 string server_number = await imageRoute.SubdomainFromUrl(mangaUrl);
                 string str_server = server_number[0].ToString();
                 mangaListReply.Add(mangaUrl.Insert(8, str_server));
