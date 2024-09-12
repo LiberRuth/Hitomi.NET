@@ -37,20 +37,23 @@ namespace Hitomi.NET
 
             public async Task<string> B()
             {
+                //var options = new Jint.Options().Strict();
+                //var engine = new Engine(options);
                 var engine = new Engine();
-                var ggjs = engine.Execute(GGtext).GetCompletionValue().ToObject() as ObjectInstance;
-                engine.Execute(GGtext).GetCompletionValue().ToObject();
-                return engine.Execute($"gg.b").GetCompletionValue().ToObject().ToString()!;
+                var result = engine.Evaluate(GGtext!);
+                var ggjs = result.AsObject();
+                engine.Evaluate(GGtext!);
+                return engine.Evaluate("gg.b").ToString();
             }
 
             public async Task<int> M(int m)
             {
+                //var options = new Jint.Options().Strict();
+                //var engine = new Engine(options);
                 var engine = new Engine();
-                //engine.Execute(GGtext).GetCompletionValue().ToObject() as ObjectInstance;
-                engine.Execute(GGtext).GetCompletionValue().ToObject();
-                var ggMFunction = engine.GetValue("gg").AsObject().Get("m").As<FunctionInstance>();
-                var ggMResult = ggMFunction.Call(Undefined.Instance, new[] { new JsValue(m) }).ToString();
-                return int.Parse(ggMResult);
+                engine.Execute(GGtext!);
+                var result = engine.Evaluate($"gg.m({m})");
+                return Convert.ToInt32(result.ToObject());
             }
 
         }
