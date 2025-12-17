@@ -10,7 +10,7 @@ namespace ConsoleAppTest
 
             hitomiWebp.thread = 4;
 
-            List<string> data = await hitomiWebp.HitomiImageSingleList(1767027);
+            List<string> data = await hitomiWebp.HitomiImageList(1767027);
 
             foreach (string item in data) 
             {
