@@ -8,7 +8,12 @@ Hitomi.la (히토미) 비공식 API
 솔루션 > 추가 > 기존 프로젝트 > Hitomi.NET 프로젝트 추가 > 프로젝트 > 프로젝트 참조 추가
 # Example
 ```cs
-HitomiWebp.threads = 4;
-HitomiWebp.dir = $@"C:\Users\{Environment.UserName}\Downloads\filestest";
-await HitomiWebp.HitomiDownload(12345);
+HitomiWebp hitomiWebp = new HitomiWebp();
+
+List<string> data = await hitomiWebp.HitomiImageList(123456);
+
+foreach (string item in data) 
+{
+  Console.WriteLine(item);
+}
 ```
