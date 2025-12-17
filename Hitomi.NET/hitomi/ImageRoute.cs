@@ -78,8 +78,8 @@ namespace Hitomi.NET
             int g = Convert.ToInt32(m.Groups[2].Value + m.Groups[1].Value, b);
             if (!double.IsNaN(g))
             {
-                GG gG = new GG();
-                retval = Convert.ToChar(97 + await gG.M(g)).ToString() + retval;
+                GG gg = new GG();
+                retval = Convert.ToChar(97 + await gg.M(g)).ToString() + retval;
             }
 
             return retval;

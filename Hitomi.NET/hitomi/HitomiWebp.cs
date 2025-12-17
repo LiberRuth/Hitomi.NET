@@ -70,35 +70,10 @@ namespace Hitomi.NET
             await Task.WhenAll(tasks);
         }
 
-        public async Task<List<string>> HitomiImageList(int number)
+        public async Task<List<string>> HitomiImageList(int number) 
         {
             var mangaListReply = new List<string>();
             var mangaList = await imageRoute.List_Hash(number);
-
-            List<Task> tasks = new List<Task>();
-            SemaphoreSlim semaphore = new SemaphoreSlim(thread);
-
-            foreach (var item in mangaList)
-            {
-                var Files = imageRoute.Image_Hash(item);
-                await GG.GgJS();
-                string mangaUrl = $"https://a.hitomi.la/webp/{await GG.B()}{Files}/{item}.webp";
-                string server_number = await imageRoute.SubdomainFromUrl(mangaUrl);
-                string str_server = server_number[0].ToString();
-                mangaListReply.Add(mangaUrl.Insert(8, str_server));
-
-            }
-            
-            return mangaListReply;
-        }
-
-        public async Task<List<string>> HitomiImageSingleList(int number) 
-        {
-            var mangaListReply = new List<string>();
-            var mangaList = await imageRoute.List_Hash(number);
-
-            List<Task> tasks = new List<Task>();
-            SemaphoreSlim semaphore = new SemaphoreSlim(thread);
 
             await GG.GgJS();
 
