@@ -27,7 +27,7 @@ namespace Hitomi.NET
             {
                 HttpClient httpclient = new HttpClient();
                 //HttpResponseMessage response = await httpclient.GetAsync("https://dotnet.microsoft.com/ko-kr/");
-                HttpResponseMessage response = await httpclient.GetAsync("https://ltn.hitomi.la/gg.js");
+                HttpResponseMessage response = await httpclient.GetAsync("https://ltn.gold-usergeneratedcontent.net/gg.js");
                 response.EnsureSuccessStatusCode();
                 //HttpStatusCode status = response.StatusCode; //HTTP 200 이면 OK
                 var script = "var gg = {}; ";
@@ -90,7 +90,9 @@ namespace Hitomi.NET
             List<string> hash_name = new List<string>();
             
             HttpClient httpclient = new HttpClient();
-            HttpResponseMessage response = await httpclient.GetAsync($"https://ltn.hitomi.la/galleries/{number}.js");
+
+            //ltn.hitomi.la 레거시 -> ltn.gold-usergeneratedcontent.net
+            HttpResponseMessage response = await httpclient.GetAsync($"https://ltn.gold-usergeneratedcontent.net/galleries/{number}.js");
             response.EnsureSuccessStatusCode();
             var JSText = await response.Content.ReadAsStringAsync();
             JSText = JSText.Replace("var galleryinfo = ", "");
